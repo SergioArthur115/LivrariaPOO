@@ -128,6 +128,31 @@ public class LivrariaPOO {
         }
     }
 
+    public static void deletarCliente() {
+        System.out.println("|Deletar Cliente|");
+        System.out.print("Informe o CPF: ");
+        String cpf = ler.next();
+        if (Validadores.isCPF(cpf)) {
+            Cliente cli = cadCliente.getClienteCPF(cpf);
+            if (cli != null) {
+                cadCliente.removeCliente(cli);
+                System.out.println("Cliente deletado com sucesso!");
+            } else {
+                System.out.println("Cliente não consta na base de dados!");
+            }
+        } else {
+            System.out.println("CPF inválido!");
+        }
+    }
+
+    public static void listarCliente() {
+        for (Cliente cli : cadCliente.getClientes()) {
+            System.out.println("\nCPF: " + cli.getCpf());
+            System.out.println("Nome: " + cli.getNomeCliente());
+            System.out.println("Telefone: " + cli.getTelefone());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -159,10 +184,11 @@ public class LivrariaPOO {
                                 break;
                             case 3:
                                 System.out.println("|Listar|");
-                                System.out.println(cadCliente.getClientes().toString());
+                                listarCliente();
                                 break;
                             case 4:
                                 System.out.println("|Deletar|");
+                                deletarCliente();
                             case 0:
                                 System.out.println("|Menu Principal|");
                                 break;
