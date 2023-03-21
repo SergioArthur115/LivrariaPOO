@@ -128,6 +128,44 @@ public class LivrariaPOO {
         }
     }
 
+    public static void editarCliente() {
+        System.out.println("|Editar Cliente|");
+        System.out.print("Informe o CPF: ");
+        String cpf = ler.nextLine();
+        if (Validadores.isCPF(cpf)) {
+            Cliente cli = cadCliente.getClienteCPF(cpf);
+            if (cli != null) {
+                System.out.println("1 - Nome: " + cli.getNomeCliente());
+                System.out.println("2 - Endereço: " + cli.getEndereco());
+                System.out.println("3 - Telefone: " + cli.getTelefone());
+                System.out.println("4 - Todos as campos acima");
+                System.out.print("Informe o campo a qual deseja alterar:");
+                int opEditar = leiaNumGPT();
+
+                if (opEditar == 1 || opEditar == 4) {
+                    System.out.print("Informe o novo nome: ");
+                    cli.setNomeCliente(ler.nextLine());
+                }
+                if (opEditar == 2 || opEditar == 4) {
+                    System.out.print("Informe o novo endereço: ");
+                    cli.setEndereco(ler.nextLine());
+                }
+                if (opEditar == 3 || opEditar == 4) {
+                    System.out.print("Informe o novo telefone: ");
+                    cli.setTelefone(ler.nextLine());
+                }
+                if (opEditar < 1 || opEditar > 4) {
+                    System.out.println("Opção inválida");
+                }
+                System.out.println("Cliente: \n" + cli.toString());
+            } else {
+                System.out.println("Cliente não cadastrado!");
+            }
+        } else {
+            System.out.println("CPF inválido!");
+        }
+    }
+
     public static void deletarCliente() {
         System.out.println("|Deletar Cliente|");
         System.out.print("Informe o CPF: ");
@@ -181,6 +219,7 @@ public class LivrariaPOO {
                                 break;
                             case 2:
                                 System.out.println("|Editar|");
+                                editarCliente();
                                 break;
                             case 3:
                                 System.out.println("|Listar|");
@@ -191,6 +230,7 @@ public class LivrariaPOO {
                                 deletarCliente();
                             case 0:
                                 System.out.println("|Menu Principal|");
+                                menuP();
                                 break;
                             default:
                                 System.out.println("ERROR 404!!!");
@@ -209,5 +249,4 @@ public class LivrariaPOO {
         } while (opM != 0);
 
     }
-
 }
