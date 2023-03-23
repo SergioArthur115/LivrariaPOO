@@ -100,7 +100,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro{" + "idLivro=" + idLivro + ", idEditora=" + idEditora + ", estoque=" + estoque + ", preco=" + preco + ", titulo=" + titulo + ", autor=" + autor + ", assunto=" + assunto + ", isbn=" + isbn + '}';
+        return "Livro{\n" + "\nidLivro=" + idLivro + ", \nidEditora=" + idEditora + ", \nestoque=" + estoque + ", \npreco=" + preco + ", \ntitulo=" + titulo + ", \nautor=" + autor  + '}';
     }
 
 }

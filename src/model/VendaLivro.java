@@ -73,7 +73,7 @@ public class VendaLivro {
 
     @Override
     public String toString() {
-        return "VendaLivro{" + "idVendaLivro=" + idVendaLivro + ", idCliente=" + idCliente + ", livros=" + livros + ", subTotal=" + subTotal + ", dataVenda=" + dataVenda + '}';
+        return "Venda{\n" + ", \nCliente=" + idCliente.getNomeCliente() + ", \nlivros=" + livros + ", \nsubTotal=" + subTotal + ", \ndataVenda=" + dataVenda + '}';
     }
 
 }

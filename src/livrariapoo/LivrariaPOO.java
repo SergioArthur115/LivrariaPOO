@@ -9,11 +9,14 @@ import controller.CCliente;
 import controller.CEditora;
 import controller.CLivro;
 import controller.CVendaLivro;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.Cliente;
 import model.Editora;
 import model.Livro;
+import model.VendaLivro;
 import util.Validadores;
 
 /**
@@ -58,12 +61,12 @@ public class LivrariaPOO {
 
     public static void menuP() {
         System.out.println("|Livraria|");
-        System.out.println("1 - Gerenciar Clientes");
-        System.out.println("2 - Gerenciar Editoras");
-        System.out.println("3 - Gerenciar Livros");
-        System.out.println("4 - Venda Livro");
-        System.out.println("0 - Sair");
-        System.out.print("Escolha uma opção: ");
+        System.out.println("|1 - Gerenciar Clientes|");
+        System.out.println("|2 - Gerenciar Editoras|");
+        System.out.println("|3 - Gerenciar Livros  |");
+        System.out.println("|4 - Venda Livro       |");
+        System.out.println("|0 - Sair              |");
+        System.out.print("|Escolha uma opção: ");
     }
 
     public static void subMenu(int op) {
@@ -79,13 +82,13 @@ public class LivrariaPOO {
                 tipoCad = "Livro";
                 break;
         }
-        System.out.println("| Gerenciar " + tipoCad + " |");
-        System.out.println("1 - Cadastrar " + tipoCad);
-        System.out.println("2 - Editar " + tipoCad);
-        System.out.println("3 - Listar " + tipoCad + "s");
-        System.out.println("4 - Deletar " + tipoCad);
-        System.out.println("0 - Voltar");
-        System.out.print("Escolha uma opção: ");
+        System.out.println("| Gerenciar " + tipoCad + "    |");
+        System.out.println("|1 - Cadastrar " + tipoCad + " |");
+        System.out.println("|2 - Editar " + tipoCad + "    |");
+        System.out.println("|3 - Listar " + tipoCad + "s   |");
+        System.out.println("|4 - Deletar " + tipoCad + "   |");
+        System.out.println("|0 - Voltar");
+        System.out.print("  Escolha uma opção: ");
     }
 
     public static void cadastrarCliente() {
@@ -411,6 +414,59 @@ public class LivrariaPOO {
         }
     }
 
+    public static void vendaLivro() {
+        int idVendaLivro;
+        Cliente idCliente = null;
+        ArrayList<Livro> livros = new ArrayList<>();
+        float subTotal = 0;
+        LocalDate dataVenda = LocalDate.now();
+
+        do {
+            System.out.println("Informe o CPF do cliente: ");
+            String CPF = ler.nextLine();
+            if (Validadores.isCPF(CPF)) {
+                idCliente = cadCliente.getClienteCPF(CPF);
+                if (idCliente == null) {
+                    System.out.println("Cliente não cadastrado, tente novamente!");
+                }
+            } else {
+                System.out.println("CPF inválido, tente novamente!");
+            }
+        } while (idCliente == null);
+
+        boolean venda = true;
+        do {
+            Livro li = null;
+            String isbn;
+            do {
+                System.out.println("Informe o ISBN: ");
+                isbn = ler.nextLine();
+                li = cadLivro.getLivroISBN(isbn);
+                if (li == null) {
+                    System.out.println("Livro não encontrado, tente novamente!");
+                }
+            } while (li == null);
+            if (li.getEstoque() > 0) {
+                livros.add(li);
+                cadLivro.attEstoqueLivro(li.getIsbn());
+                subTotal += li.getPreco();
+            } else {
+                System.out.println(li.getTitulo() + "está fora de estoque");
+            }
+
+            System.out.println("Deseja comprar mais livros nesta venda?"
+                    + "\n1 - Sim | 2 - não"
+                    + "\nDigite: ");
+            if (leiaNumGPT() == 2) {
+                venda = false;
+            }
+        } while (venda);
+        idVendaLivro = cadVendaLivro.geraID();
+        VendaLivro vl = new VendaLivro(idVendaLivro, idCliente, livros, subTotal, dataVenda);
+        cadVendaLivro.addVendaLivro(vl);
+        System.out.println("|Venda|\n" + vl.toString());
+    }
+
     public static void main(String[] args) {
         cadCliente.mockClientes();
         cadEditora.mockEditoras();
@@ -474,9 +530,8 @@ public class LivrariaPOO {
                                 }
                                 break;
                             case 0:
-                                System.out.println("|Menu Principal");
+                                System.out.println("|Menu Principal|");
                                 opM = 99;
-                                menuP();
                                 break;
                             default:
                                 System.out.println("ERROR 404!!!");
@@ -487,6 +542,7 @@ public class LivrariaPOO {
                     break;
                 case 4:
                     System.out.println("|Venda Livro|");
+                    vendaLivro();
                     break;
                 default:
                     System.out.println("Entrada inválida, tente novamente!");
