@@ -61,7 +61,7 @@ public class CLivro {
     public void mockLivros() {
         Livro l1 = new Livro();
         l1.setIdLivro(this.geraID());
-        l1.setIdEditora(LivrariaPOO.cadEditora.getEditoraCNPJ("567890451"));
+        l1.setIdEditora(LivrariaPOO.cadEditora.getEditoraCNPJ("99183018000133"));
         l1.setTitulo("Conhecimentos e utilizações do ChatGPT");
         l1.setAutor("Sérgio Arthur");
         l1.setIsbn("172204932");
@@ -72,7 +72,7 @@ public class CLivro {
 
         Livro l2 = new Livro();
         l2.setIdLivro(this.geraID());
-        l2.setIdEditora(LivrariaPOO.cadEditora.getEditoraCNPJ("745087100"));
+        l2.setIdEditora(LivrariaPOO.cadEditora.getEditoraCNPJ("36363055000103"));
         l2.setTitulo("A Bela e a Fera");
         l2.setAutor("Gabrielle-Suzanne Barbot de Villeneuve");
         l2.setIsbn("608604936");

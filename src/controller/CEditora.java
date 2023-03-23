@@ -60,7 +60,7 @@ public class CEditora {
     public void mockEditoras() {
         Editora e1 = new Editora();
         e1.setNomeEditora("Jovens Letras");
-        e1.setCnpj("567890451");
+        e1.setCnpj("99183018000133");
         e1.setEndereco("Av. João Obino 300");
         e1.setTelefone("51291626718");
         e1.setGerente("Roberval da Silva");
@@ -69,7 +69,7 @@ public class CEditora {
         Editora e2 = new Editora();
         e2.setIdEditora(this.geraID());
         e2.setNomeEditora("Jair e Javoltar");
-        e2.setCnpj("745087100");
+        e2.setCnpj("36363055000103");
         e2.setEndereco("Av. Bento Gonçalves 4169");
         e2.setTelefone("51201848048");
         e2.setGerente("Jair Ferraz");
