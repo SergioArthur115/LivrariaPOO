@@ -6,6 +6,8 @@
 package util;
 
 import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -153,5 +155,12 @@ public class Validadores {
         return (CNPJ.substring(0, 2) + "." + CNPJ.substring(2, 5) + "."
                 + CNPJ.substring(5, 8) + "." + CNPJ.substring(8, 12) + "-"
                 + CNPJ.substring(12, 14));
+    }
+
+    public static boolean validarTelefone(String telefone) {
+        String regex = "\\(?\\d{2}\\)?\\s?\\d{4,5}\\-?\\d{4}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(telefone);
+        return matcher.matches();
     }
 }

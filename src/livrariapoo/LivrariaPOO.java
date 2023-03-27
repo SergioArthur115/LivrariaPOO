@@ -101,8 +101,8 @@ public class LivrariaPOO {
 
         System.out.println("|Cadastro de Cliente|");
         System.out.print("Informe o CPF:");
-        boolean cpfis;
-        int opCPF;
+        boolean cpfis, tel;
+        int opCPF, opTel;
         do {
             cpf = ler.nextLine();
             cpfis = Validadores.isCPF(cpf);
@@ -114,7 +114,7 @@ public class LivrariaPOO {
                     System.out.print("Informe o CPF:");
                 } else if (opCPF == 2) {
                     System.out.println("Cadastro cancelado pelo usuário");
-                    break;
+                    return;
                 }
             }
         } while (!Validadores.isCPF(cpf));
@@ -124,7 +124,22 @@ public class LivrariaPOO {
             System.out.println("Informe o nome:");
             nomeCliente = ler.nextLine();
             System.out.println("Informe o telefone:");
-            telefone = ler.nextLine();
+            do {
+                telefone = ler.nextLine();
+                tel = Validadores.validarTelefone(telefone);
+                if (!tel) {
+                    System.out.println("Telefone Inválido" + "\nDeseja tentar novamente? 1- Sim | 2 - Não");
+                    opTel = leiaNumGPT();
+
+                    if (opTel == 1) {
+                        System.out.print("Informe o Telefone:");
+                    } else if (opTel == 2) {
+                        System.out.println("Cadastro cancelado pelo usuário");
+                        return;
+                    }
+                }
+            } while (!Validadores.validarTelefone(telefone));
+
             System.out.println("Informe o endereço:");
             endereco = ler.nextLine();
             idCliente = cadCliente.geraID();
@@ -207,8 +222,8 @@ public class LivrariaPOO {
 
         System.out.println("|Cadastro de Editora|");
         System.out.print("Informe o CNPJ:");
-        boolean cnpjis;
-        int opCNPJ;
+        boolean cnpjis,tel;
+        int opCNPJ,opTel;
         do {
             cnpj = ler.nextLine();
             cnpjis = Validadores.isCNPJ(cnpj);
@@ -220,7 +235,7 @@ public class LivrariaPOO {
                     System.out.print("Informe o CNPJ:");
                 } else if (opCNPJ == 2) {
                     System.out.println("Cadastro cancelado pelo usuário");
-                    break;
+                    return;
                 }
             }
         } while (!Validadores.isCNPJ(cnpj));
@@ -230,7 +245,21 @@ public class LivrariaPOO {
             System.out.println("Informe o nome:");
             nomeEditora = ler.nextLine();
             System.out.println("Informe o telefone:");
-            telefone = ler.nextLine();
+            do {
+                telefone = ler.nextLine();
+                tel = Validadores.validarTelefone(telefone);
+                if (!tel) {
+                    System.out.println("Telefone Inválido" + "\nDeseja tentar novamente? 1- Sim | 2 - Não");
+                    opTel = leiaNumGPT();
+
+                    if (opTel == 1) {
+                        System.out.print("Informe o Telefone:");
+                    } else if (opTel == 2) {
+                        System.out.println("Cadastro cancelado pelo usuário");
+                        return;
+                    }
+                }
+            } while (!Validadores.validarTelefone(telefone));
             System.out.println("Informe o endereço:");
             endereco = ler.nextLine();
             System.out.println("Informe o nome do gerente");
